@@ -1,0 +1,29 @@
+stages:
+  - build
+
+image: docker:latest
+services:
+  - docker:dind
+
+build tag:
+  stage: build
+  only:
+    - tag
+  variables:
+    TAG_COMMIT: $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
+  script:
+    - docker build -t ${TAG_COMMIT} 
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker push ${TAG_COMMIT}
+
+build latest:
+  stage: build
+  only:
+    - merge_requests
+  variables:
+    TAG_LATEST: $CI_REGISTRY_IMAGE:latest
+  script:
+    - docker build -t ${TAG_LATEST} 
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker push ${TAG_LATEST}
+   
