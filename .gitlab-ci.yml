@@ -13,7 +13,7 @@ variables:
 build tag:
   stage: build
   only:
-    - tag
+    - tags
   script:
     - echo "Building ${TAG_COMMIT}..."
     - docker build -t ${TAG_COMMIT} .
