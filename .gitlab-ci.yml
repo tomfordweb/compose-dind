@@ -16,7 +16,7 @@ build tag:
     - tags
   script:
     - echo "Building ${TAG_COMMIT}..."
-    - docker pull $TAG_LATEST
+    - docker pull $TAG_LATEST || true
     - docker build -t ${TAG_COMMIT} .
     - echo "$DOCKERHUB_PASSWORD" | docker login -u $DOCKERHUB_USERNAME --password-stdin
     - docker push ${TAG_COMMIT}
@@ -27,7 +27,7 @@ build latest:
     - master
   script:
     - echo "Building ${TAG_LATEST}..."
-    - docker pull $TAG_LATEST
+    - docker pull $TAG_LATEST || true
     - docker build -t ${TAG_LATEST} .
     - echo "$DOCKERHUB_PASSWORD" | docker login -u $DOCKERHUB_USERNAME --password-stdin
     - docker push ${TAG_LATEST}
