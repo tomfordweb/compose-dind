@@ -16,8 +16,9 @@ build tag:
     - tags
   script:
     - echo "Building ${TAG_COMMIT}..."
+    - docker pull $TAG_LATEST
     - docker build -t ${TAG_COMMIT} .
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - echo "$DOCKERHUB_PASSWORD" | docker login -u $DOCKERHUB_USERNAME --password-stdin
     - docker push ${TAG_COMMIT}
 
 build latest:
@@ -26,7 +27,8 @@ build latest:
     - master
   script:
     - echo "Building ${TAG_LATEST}..."
+    - docker pull $TAG_LATEST
     - docker build -t ${TAG_LATEST} .
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - echo "$DOCKERHUB_PASSWORD" | docker login -u $DOCKERHUB_USERNAME --password-stdin
     - docker push ${TAG_LATEST}
    
