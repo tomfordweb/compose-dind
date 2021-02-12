@@ -1,17 +1,15 @@
 # Introduction
-.. 
 
-This image includes a few extra helpful utilities such as `jq`, `python`, and `curl`
+This image includes a few extra helpful utilities such as `jq` and `curl`
 
 # Use
 
 On whatever stage you need compose on, add the following image and services. I have included some compose examples for you.
 
-
 ```yml
 build something cool:
   stage: build
-  image: $CI_REGISTRY/tfwg/compose-dind:latest
+  image: tomfordweb/compose-dind:latest
   services:
     - docker:dind
   script:
@@ -20,7 +18,7 @@ build something cool:
 
 test something cool:
   stage: test
-  image: $CI_REGISTRY/tfwg/compose-dind:latest
+  image: tomfordweb/compose-dind:latest
   services:
     - docker:dind
   script:
