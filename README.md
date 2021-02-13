@@ -1,4 +1,4 @@
-# Introduction
+This is a docker base image with compose installed to be used in your pipelines.
 
 This image includes a few extra helpful utilities such as `jq` and `curl`
 
